@@ -34,7 +34,7 @@ public class AlertRabbit {
         return DriverManager.getConnection(url, login, pass);
     }
 
-    public static void main (String[]args) {
+    public static void main(String[] args) {
         int interval = Integer.parseInt(rabbitProperties().getProperty("rabbit.interval"));
         try (Connection connection = init(rabbitProperties())) {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
