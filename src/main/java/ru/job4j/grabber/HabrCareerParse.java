@@ -30,9 +30,7 @@ public class HabrCareerParse {
                 LocalDateTime date = new HabrCareerDateTimeParser().parse(dateElement.attr("datetime"));
                 System.out.printf("%s %s %s%n", vacancyName, date, link);
             });
-
         }
-
     }
 }
 
