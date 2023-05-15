@@ -42,19 +42,19 @@ public class HabrCareerParse implements Parse {
             Document document = connection.get();
             Elements rows = document.select(".vacancy-card__inner");
             rows.forEach(row -> {
+                Post post = new Post();
+                Element dateElement = row.select(".vacancy-card__date").first().child(0);
                 Element titleElement = row.select(".vacancy-card__title").first();
                 Element linkElement = titleElement.child(0);
-                String title = titleElement.text();
-                String linkVacancy = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
-                String description = null;
+                post.setLocalDateTime(dateTimeParser.parse(dateElement.attr("datetime")));
+                post.setTitle(titleElement.text());
+                post.setLink(String.format("%s%s", SOURCE_LINK, linkElement.attr("href")));
                 try {
-                    description = retrieveDescription(linkVacancy);
+                    post.setDescription(retrieveDescription(post.getLink()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String date = row.select(".vacancy-card__date").first().child(0).attr("datetime");
-                LocalDateTime dateVacancy = new HabrCareerDateTimeParser().parse(date);
-                listPosts.add(new Post(title, linkVacancy, description, dateVacancy));
+                listPosts.add(post);
             });
         }
         return listPosts;

@@ -4,20 +4,12 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Post {
+
     private int id;
     private String title;
     private String link;
     private String description;
-    private LocalDateTime created;
-
-    public Post(String title, String link, String description, LocalDateTime created) {
-        this.id = id++;
-        this.title = title;
-        this.link = link;
-        this.description = description;
-        this.created = created;
-
-    }
+    private LocalDateTime localDateTime;
 
     @Override
     public boolean equals(Object o) {
@@ -43,16 +35,8 @@ public class Post {
                 + ", title='" + title + '\''
                 + ", link='" + link + '\''
                 + ", description='" + description + '\''
-                + ", created=" + created
+                + ", localDateTime=" + localDateTime
                 + '}';
-    }
-
-    public Post(int id, String title, String link, String description, LocalDateTime created) {
-        this.id = id;
-        this.title = title;
-        this.link = link;
-        this.description = description;
-        this.created = created;
     }
 
     public int getId() {
@@ -87,11 +71,11 @@ public class Post {
         this.description = description;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public void setLocalDateTime(LocalDateTime LocalDateTime) {
+        this.localDateTime = LocalDateTime;
     }
 }
