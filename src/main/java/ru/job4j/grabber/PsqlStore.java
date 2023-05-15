@@ -35,13 +35,13 @@ public class PsqlStore implements Store, AutoCloseable {
     @Override
     public void save(Post post) {
         try (PreparedStatement prs = cnn.prepareStatement(
-                "insert into post(name, text, link, created)" +
-                        "values (?, ?, ?, ?) on conflict (link) do nothing;",
+                "insert into post(name, text, link, created)"
+                        + "values (?, ?, ?, ?) on conflict (link) do nothing;",
                 Statement.RETURN_GENERATED_KEYS)) {
             prs.setString(1, post.getTitle());
             prs.setString(2, post.getLink());
             prs.setString(3, post.getDescription());
-            prs.setTimestamp(4, Timestamp.valueOf(post.getLocalDateTime()));
+            prs.setTimestamp(4, Timestamp.valueOf(post.getCreated()));
             prs.execute();
             try (ResultSet generatedKey = prs.getGeneratedKeys()) {
                 if (generatedKey.next()) {
@@ -64,7 +64,7 @@ public class PsqlStore implements Store, AutoCloseable {
                     post.setTitle(resultSet.getString("name"));
                     post.setDescription(resultSet.getString("text"));
                     post.setLink(resultSet.getString("link"));
-                    post.setLocalDateTime(resultSet.getTimestamp("created").toLocalDateTime());
+                    post.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
                     allPost.add(post);
                 }
             }
@@ -85,7 +85,7 @@ public class PsqlStore implements Store, AutoCloseable {
                     idPost.setTitle(resultSet.getString("name"));
                     idPost.setDescription(resultSet.getString("text"));
                     idPost.setLink(resultSet.getString("link"));
-                    idPost.setLocalDateTime(resultSet.getTimestamp("created").toLocalDateTime());
+                    idPost.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
                 }
             }
         } catch (Exception e) {

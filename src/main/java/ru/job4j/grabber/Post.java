@@ -9,7 +9,7 @@ public class Post {
     private String title;
     private String link;
     private String description;
-    private LocalDateTime localDateTime;
+    private LocalDateTime created;
 
     @Override
     public boolean equals(Object o) {
@@ -35,7 +35,7 @@ public class Post {
                 + ", title='" + title + '\''
                 + ", link='" + link + '\''
                 + ", description='" + description + '\''
-                + ", localDateTime=" + localDateTime
+                + ", localDateTime=" + created
                 + '}';
     }
 
@@ -71,11 +71,11 @@ public class Post {
         this.description = description;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDateTime getCreated() {
+        return created;
     }
 
-    public void setLocalDateTime(LocalDateTime LocalDateTime) {
-        this.localDateTime = LocalDateTime;
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 }
