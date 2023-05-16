@@ -11,6 +11,18 @@ public class Post {
     private String description;
     private LocalDateTime created;
 
+    public Post(int id, String name, String text, String link, LocalDateTime created) {
+        this.id = id;
+        this.title = name;
+        this.link = text;
+        this.description = link;
+        this.created = created;
+    }
+
+    public Post() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
